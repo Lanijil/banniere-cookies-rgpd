@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Bannière Cookie RGPD</title>
+<style>
+    body { font-family: sans-serif; margin: 0; padding: 0; }
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #fff;
+      color: #000;
+      border-top: 1px solid #ccc;
+      padding: 20px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      display: none;
+      z-index: 9999;
+    }
+    .cookie-banner.active { display: block; }
+    .cookie-buttons button {
+      margin-right: 10px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .accept { background: #4caf50; color: white; }
+    .reject { background: #f44336; color: white; }
+    .settings { background: #888; color: white; }
+</style>
+</head>
+<body>
+ 
+  <div class="cookie-banner" id="cookieBanner">
+<p>Ce site utilise des cookies pour améliorer votre expérience utilisateur.</p>
+<div class="cookie-buttons">
+<button class="accept" onclick="handleConsent('accepted')">Tout accepter</button>
+<button class="reject" onclick="handleConsent('rejected')">Tout refuser</button>
+<button class="settings" onclick="alert('Module de réglage à venir')">Paramétrer mes choix</button>
+</div>
+</div>
+ 
+  <script>
+    const banner = document.getElementById('cookieBanner');
+ 
+    function handleConsent(choice) {
+      localStorage.setItem('cookieConsent', choice);
+      banner.classList.remove('active');
+ 
+      if (choice === 'accepted') {
+        // Tu peux activer ici des scripts tiers
+        console.log("Consentement accepté");
+        // ex: activer Google Analytics
+      } else {
+        console.log("Consentement refusé");
+      }
+    }
+ 
+    function checkConsent() {
+      const consent = localStorage.getItem('cookieConsent');
+      if (!consent) {
+        banner.classList.add('active');
+      }
+    }
+ 
+    window.onload = checkConsent;
+</script>
+ 
+</body>
+</html>
