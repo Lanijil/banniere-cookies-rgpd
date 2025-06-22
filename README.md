@@ -1,0 +1,1 @@
+# banniere-cookies-rgpd
